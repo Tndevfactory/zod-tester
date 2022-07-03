@@ -1,0 +1,14 @@
+Simply Run This Command.
+
+git rm .env --cached
+git commit -m "Stopped tracking .env File"
+git
+not work
+It is because your .env file has been pushed to git.
+
+You should first delete that from git and push your changes.
+
+rm -f .env
+git add .
+git commit -m "remove .env file from git"
+git push
