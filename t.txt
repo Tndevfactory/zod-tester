@@ -12,3 +12,10 @@ rm -f .env
 git add .
 git commit -m "remove .env file from git"
 git push
+
+
+Migration admin.0001_initial is applied before its dependency users.0001_initial on database 'default'
+Answer:
+
+There's a django_migrations table in your database after your previous migration which is the cause of this inconsistency.
+Solution: Deleting the django_migrations table from your database and then perform python manage.py makemigrations plus python manage.py migrate again.

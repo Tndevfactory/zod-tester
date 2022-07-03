@@ -36,6 +36,8 @@ DEBUG = os.getenv('DEBUG', config('DEBUG', default=True, cast=bool)),
 # EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS')),
+AUTH_USER_MODEL="myauth.User"
+
 # print(ALLOWED_HOSTS)
 # os.environ['HOME'] = 'os environ set to home'
 # print(os.getenv('HOME', config('MONGODB_URI')))
@@ -49,13 +51,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'myauth',
+    'myhelpers',
     'cnam',
     'cnrps',
     'cnss',
     'steg',
     'telecom',
-    'rest_framework',
-    'auth'
 
 ]
 
