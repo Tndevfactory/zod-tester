@@ -150,3 +150,7 @@ migrate the database tables
    python manage.py migrate
 start a development server using
    python manage.py runserver
+reference
+User Registration (Email/Password). Django Rest Framework complete tutorial.#6
+https://github.com/CryceTruly/djangoresttodo/blob/main/todolistapi/settings.py
+https://www.youtube.com/watch?v=S0S0oxrses8&list=PLx-q4INfd95FWHy9M3Gt6NkUGR2R2yqT8&index=6
