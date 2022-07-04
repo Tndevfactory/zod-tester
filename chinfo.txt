@@ -140,7 +140,7 @@ create a virtualenv using virtualenv
    python -m pip install --upgrade pip
    pip install virtualenv
    virtualenv venv_name
-activate it
+activate it now
    source venv_name/bin/activate
 or activate Windows
    venv_name/bin/activate.bat
