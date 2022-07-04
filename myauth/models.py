@@ -1,12 +1,17 @@
 from django.apps import apps
 from django.contrib.auth.hashers import make_password
 from django.db import models
-from django.utils import timezone
 from myhelpers.models import TrackingModel
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin, BaseUserManager, UserManager)
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+import jwt
+from datetime import datetime, timedelta
 
+#from core.core import settings
+import os
+from decouple import config
 
 class MyUserManager(UserManager):
     def _create_user(self, username, email, password, **extra_fields):
@@ -91,6 +96,11 @@ class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
-    @property
     def token(self):
-        return ''
+        secret_key = os.getenv('SECRET_KEY', config('SECRET_KEY'))
+        token = jwt.encode(
+            {'username': self.username, 'email': self.email,
+                'exp': datetime.utcnow() + timedelta(hours=24)},
+            secret_key, algorithm='HS256')
+
+        return token
