@@ -36,7 +36,7 @@ DEBUG = os.getenv('DEBUG', config('DEBUG', default=True, cast=bool)),
 # EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', config('ALLOWED_HOSTS')),
-AUTH_USER_MODEL="myauth.User"
+AUTH_USER_MODEL = "myauth.User"
 
 # print(ALLOWED_HOSTS)
 # os.environ['HOME'] = 'os environ set to home'
@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
+    'drf_yasg',
     'myauth',
     'myhelpers',
     'cnam',
@@ -64,6 +66,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,6 +141,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'myauth.jwt.JWTAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': "rest_framework.pagination.PageNumberPagination",
+    'PAGE_SIZE': 12
+
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

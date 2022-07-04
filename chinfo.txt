@@ -126,3 +126,27 @@ rm -f .env
 git add .
 git commit -m "remove .env file from git"
 git push
+core urls
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+----------------------step after cloning django project ------------------------
+pull the project using git
+   git clone https://github.com/CryceTruly/django-rest-api.git
+create a virtualenv using virtualenv
+   python -m pip install --upgrade pip
+   pip install virtualenv
+   virtualenv venv_name
+activate it
+   source venv_name/bin/activate
+or activate Windows
+   venv_name/bin/activate.bat
+install dependencies from the requirements.txt file
+   pip install -r requirements.txt
+migrate the database tables
+   python manage.py migrate
+start a development server using
+   python manage.py runserver
