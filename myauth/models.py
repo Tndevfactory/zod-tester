@@ -97,7 +97,9 @@ class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
     REQUIRED_FIELDS = ["username"]
 
     def token(self):
+
         secret_key = os.getenv('SECRET_KEY', config('SECRET_KEY'))
+
         token = jwt.encode(
             {'username': self.username, 'email': self.email,
                 'exp': datetime.utcnow() + timedelta(hours=24)},
