@@ -23,7 +23,8 @@ class StegAPIView(ListCreateAPIView):
         return serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return Facture.objects.filter(owner=self.request.user)
+        # return Facture.objects.filter(owner=self.request.user)
+        return Facture.objects.all()
 
 
 class StegDetailAPIView(RetrieveUpdateDestroyAPIView):
