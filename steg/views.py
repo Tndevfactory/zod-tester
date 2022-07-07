@@ -29,7 +29,7 @@ class StegAPIView(ListCreateAPIView):
 class StegDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = FactureSerializer
     permission_classes = (IsAuthenticated,)
-    lookup_field = "dept"
+    lookup_field = "id"
 
     def get_queryset(self):
         return Facture.objects.filter(owner=self.request.user)
