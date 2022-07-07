@@ -2,7 +2,7 @@ from django_filters.rest_framework.backends import DjangoFilterBackend
 from steg.models import Facture
 from rest_framework import permissions, filters
 from steg.serializers import FactureSerializer
-from rest_framework.generics import CreateAPIView, ListAPIView,  ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from steg.pagination import CustomPageNumberPagination
@@ -15,9 +15,9 @@ class StegAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    filterset_fields = [ 'dept', 'explanation']
-    search_fields = [ 'dept', 'explanation']
-    ordering_fields = [ 'dept', 'explanation']
+    filterset_fields = ['id', 'dept', 'explanation']
+    search_fields = ['id', 'dept', 'explanation']
+    ordering_fields = ['id', 'dept', 'explanation']
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
