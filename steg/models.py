@@ -7,12 +7,14 @@ from myauth.models import User
 class Facture(TrackingModel):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     id = models.AutoField(primary_key=True)
-    dept = models.CharField(max_length=30)
-    explanation = models.CharField(max_length=300)
-    owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    reference = models.CharField(max_length=60)
+    etatEnc = models.CharField(max_length=30)
+    etat = models.JSONField(blank=True, null=True)
+    derniereFacture = models.JSONField(blank=True, null=True)
+
 
     def __str__(self):
-            return self.dept
+            return self.reference
 
 
 
