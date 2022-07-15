@@ -155,16 +155,19 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-      'Basic': {
-            'type': 'basic'
-      },
-      'Bearer': {
+    'SECURITY_DEFINITIONS': {
+        #'Basic': { 'type': 'basic' },
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
-      }
-   }
+        },
+
+        "api_key": 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImNoIiwiZW1haWwiOiJjaEBjaC5jb20iLCJleHAiOjE2NTcwMTI5MzB9.BrKznhSh7RZ7WhH-X_xITqoDPoy_5y1l2-Eji814OkE',
+        # An API key
+        "is_authenticated": False,  # Set to True to enforce user authentication,
+        "is_superuser": False,  # Set to True to enforce admin only access
+    },
 }
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -191,4 +194,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
