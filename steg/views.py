@@ -15,9 +15,9 @@ class StegAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    filterset_fields = ['id', 'dept', 'explanation']
-    search_fields = ['id', 'dept', 'explanation']
-    ordering_fields = ['id', 'dept', 'explanation']
+    filterset_fields = ['id', 'reference' ]
+    search_fields = ['id', 'reference' ]
+    ordering_fields = ['id', 'reference' ]
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
@@ -30,7 +30,7 @@ class StegAPIView(ListCreateAPIView):
 class StegDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = FactureSerializer
     permission_classes = (IsAuthenticated,)
-    lookup_field = "id"
+    lookup_field = "reference"
 
     def get_queryset(self):
         return Facture.objects.filter(owner=self.request.user)

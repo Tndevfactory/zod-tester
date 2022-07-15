@@ -6,4 +6,4 @@ from steg.models import Facture
 class FactureSerializer(ModelSerializer):
     class Meta:
         model = Facture
-        fields = ('id', 'dept', 'explanation',)
+        fields = ('id', 'reference', 'etatEnc','etat', 'derniereFacture')

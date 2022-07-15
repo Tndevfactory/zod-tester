@@ -18,7 +18,6 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Zod API",
@@ -33,15 +32,22 @@ schema_view = get_schema_view(
     authentication_classes=[]
 )
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/auth/", include("myauth.urls")),
-    path("api/steg/", include("steg.urls")),
+    # auth gateway
+    path("api/authenticate/", include("myauth.urls")),
+
+    # microservice prepended with the name steg services/microservice1/api/
+    path("steg/services/microservice1/api/", include("steg.urls")),
+    # path("cnss/services/microservice1/api/", include("steg.urls")),
+
+    # users managment
+    # path("cnss/services/microservice1/api/", include("steg.urls")),
+
     path('swagger.json', schema_view.without_ui(
         cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger',
-         cache_timeout=0), name='schema-swagger-ui'),
+                                         cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc',
-         cache_timeout=0), name='schema-redoc'),
+                                       cache_timeout=0), name='schema-redoc'),
 ]

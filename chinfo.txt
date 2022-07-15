@@ -152,3 +152,83 @@ reference
 User Registration (Email/Password). Django Rest Framework complete tutorial.#6
 https://github.com/CryceTruly/djangoresttodo/blob/main/todolistapi/settings.py
 https://www.youtube.com/watch?v=S0S0oxrses8&list=PLx-q4INfd95FWHy9M3Gt6NkUGR2R2yqT8&index=6
+
+------------------------------------work with generic ------------------------------------
+serializer---------------------------
+from rest_framework.serializers import ModelSerializer
+from steg.models import Facture
+
+
+class FactureSerializer(ModelSerializer):
+    class Meta:
+        model = Facture
+        fields = ('id', 'refere
+model------------------------
+import uuid
+
+from django.db import models
+from myhelpers.models import TrackingModel
+from myauth.models import User
+
+class Facture(TrackingModel):
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
+    reference = models.CharField(max_length=60)
+    etatEnc = models.CharField(max_length=8)
+    etat = models.JSONField(null=True, blank=True)
+    derniereFacture = models.JSONField(null=True, blank=True)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
+
+    def __str__(self):
+            return self.reference
+
+view-----------------------------------
+
+from django_filters.rest_framework.backends import DjangoFilterBackend
+from steg.models import Facture
+from rest_framework import permissions, filters
+from steg.serializers import FactureSerializer
+from rest_framework.generics import CreateAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from steg.pagination import CustomPageNumberPagination
+
+
+class StegAPIView(ListCreateAPIView):
+    serializer_class = FactureSerializer
+    pagination_class = CustomPageNumberPagination
+    permission_classes = (IsAuthenticated,)
+    filter_backends = [DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter]
+
+    filterset_fields = ['id', 'reference' ]
+    search_fields = ['id', 'reference' ]
+    ordering_fields = ['id', 'reference' ]
+
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        # return Facture.objects.filter(owner=self.request.user)
+        return Facture.objects.all()
+
+
+class StegDetailAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = FactureSerializer
+    permission_classes = (IsAuthenticated,)
+    lookup_field = "reference"
+
+    def get_queryset(self):
+        return Facture.objects.filter(owner=self.request.user)
+
+
+
+pagination--------------------------------
+from rest_framework import pagination
+
+
+class CustomPageNumberPagination(pagination.PageNumberPagination):
+    page_size = 1
+    page_size_query_param = 'count'
+    max_page_size = 15
+    page_query_param = 'p'
