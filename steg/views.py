@@ -33,4 +33,5 @@ class StegDetailAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = "reference"
 
     def get_queryset(self):
-        return Facture.objects.filter(owner=self.request.user)
+        #return Facture.objects.filter(owner=self.request.user)
+        return Facture.objects.filter(reference=self.kwargs['reference'])

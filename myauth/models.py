@@ -9,9 +9,10 @@ from django.utils import timezone
 import jwt
 from datetime import datetime, timedelta
 
-#from core.core import settings
+# from core.core import settings
 import os
 from decouple import config
+
 
 class MyUserManager(UserManager):
     def _create_user(self, username, email, password, **extra_fields):
@@ -97,12 +98,12 @@ class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
     REQUIRED_FIELDS = ["username"]
 
     def token(self):
-
         secret_key = os.getenv('SECRET_KEY', config('SECRET_KEY'))
 
         token = jwt.encode(
-            {'username': self.username, 'email': self.email,
-                'exp': datetime.utcnow() + timedelta(hours=24)},
+            {'username': self.username, 'email': self.email, 'sub': 'admin',
+             'auth': 'ROLE_ADMIN,ROLE_USER',
+             'exp': datetime.utcnow() + timedelta(hours=24)},
             secret_key, algorithm='HS256')
 
         return token
