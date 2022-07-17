@@ -35,7 +35,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     # auth gateway
-    path("api/authenticate/", include("myauth.urls")),
+    path("api/", include("myauth.urls")),
 
     # microservice prepended with the name steg services/microservice1/api/
     path("steg/services/microservice1/api/", include("steg.urls")),
