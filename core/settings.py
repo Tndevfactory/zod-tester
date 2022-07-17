@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'django_filters',
     'drf_yasg',
     'myauth',
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'core.urls'
 
@@ -155,16 +159,16 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-      'Basic': {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
             'type': 'basic'
-      },
-      'Bearer': {
+        },
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
-      }
-   }
+        }
+    }
 }
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -191,4 +195,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
