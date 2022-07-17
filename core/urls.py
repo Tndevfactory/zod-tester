@@ -39,6 +39,8 @@ urlpatterns = [
 
     # microservice prepended with the name steg services/microservice1/api/
     path("steg/services/microservice1/api/", include("steg.urls")),
+    path("cnam/services/microservice1/api/", include("cnam.urls")),
+    path("audit/services/microservice1/api/", include("audit.urls")),
     # path("cnss/services/microservice1/api/", include("steg.urls")),
 
     # users managment
