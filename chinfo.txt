@@ -235,3 +235,26 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
 
 --------------------------------------------
 python manage.py runserver 8080
+-------------------------------------------------
+django base64 img-data---------------------------------------
+Or maybe you have project where you don’t want to deal with configuring STATIC_ROOT
+and all that serving files with Django requires.
+
+The actual Django part is pretty short:
+
+import base64
+
+with open(image_path, "rb") as image_file:
+    image_data = base64.b64encode(image_file.read()).decode('utf-8')
+
+ctx["image"] = image_data
+
+return render(request, 'index.html', ctx)
+Note: The "rb" option stands for "read binary".
+
+Optionally you can add try except to catch FileNotFoundError and react accordingly.
+
+Now we just need to display the content using <img> tag:
+
+<img src="data:image/png;base64,{{ image }}">
+------------------------------------------------------------------

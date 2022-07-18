@@ -1,17 +1,3 @@
-"""todolistapi URL Configuration
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
@@ -33,18 +19,6 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # auth gateway
-    path("api/", include("myauth.urls")),
-
-    # microservice prepended with the name steg services/microservice1/api/
-    path("steg/services/microservice1/api/", include("steg.urls")),
-    path("cnam/services/microservice1/api/", include("cnam.urls")),
-    path("audit/services/microservice1/api/", include("audit.urls")),
-    # path("cnss/services/microservice1/api/", include("steg.urls")),
-
-    # users managment
-    # path("cnss/services/microservice1/api/", include("steg.urls")),
 
     path('swagger.json', schema_view.without_ui(
         cache_timeout=0), name='schema-json'),
@@ -52,4 +26,24 @@ urlpatterns = [
                                          cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc',
                                        cache_timeout=0), name='schema-redoc'),
+
+    path('admin/', admin.site.urls),
+
+    # auth gateway
+    path("api/", include("myauth.urls")),
+
+    # microservice prepended with the name steg services/microservice1/api/
+    path("steg/services/microservice1/api/", include("steg.urls")),
+    path("cnam/services/microservice1/api/", include("cnam.urls")),
+    path("audit/services/microservice1/api/", include("audit.urls")),
+    path("cnrps/services/microservice1/api/", include("cnrps.urls")),
+    path("cnss/services/microservice1/api/", include("cnss.urls")),
+    path("faq/services/microservice1/api/", include("faq.urls")),
+    path("sonede/services/microservice1/api/", include("sonede.urls")),
+    path("myadmin/services/microservice1/api/", include("myadmin.urls")),
+    # path("cnss/services/microservice1/api/", include("steg.urls")),
+
+    # users managment
+    # path("cnss/services/microservice1/api/", include("steg.urls")),
+
 ]

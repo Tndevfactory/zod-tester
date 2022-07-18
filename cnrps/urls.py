@@ -1,21 +1,22 @@
-"""core URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
+from cnrps.views import AssureeAPIView, AssureeDetailAPIView, PensionAPIView, \
+    PensionDetailAPIView
 from django.urls import path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("assuree", AssureeAPIView.as_view(), name="AssureeAPIView"),
+    path("pension", PensionAPIView.as_view(), name="PensionAPIView"),
+    # services/microservice1/api/consultFactureAboBT/<int:id>?username=admin
+
+    # path("getAssureByMatricule/<matricule>", AssureeDetailAPIView.as_view(), name="getAssureByMatricule"),
+    # path("getAssureByCinDateNais/<str:cin>/<str:dateNaissance>", AssureeDetailAPIView.as_view(), name="getAssureByCinDateNais"),
+
+    # path("getPensionneByMatricule/<str:matricule>", PensionDetailAPIView.as_view(), name="getPensionneByMatricule"),
+    # path("getPensionneByCinDateNais/<str:cin>/<str:dateNais>", PensionDetailAPIView.as_view(),name="getPensionneByCinDateNais")
+    # path("getBulletinSoinsByMatriculeAndCaisse", CnammatriculecaisseDetailAPIView.as_view(), name="Cnammatriculecaissedetail"),
+
+    # path("getBulletinSoinsDetails/{refernceBulletin}", CnamdetailsoinAPIView.as_view(), name="cnamdetailsoin"),
+    # services/microservice1/api/consultFactureAboBT/<int:id>?username=admin
+    # path("<int:id>/microservice1?user=admin", StegDetailAPIView.as_view(), name="steg")
+    # path("getBulletinSoinsDetails/{refernceBulletin}", CnamdetailsoinDetailAPIView.as_view(), name="cnamdetailsoindetail"),
+
 ]
