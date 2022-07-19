@@ -11,6 +11,7 @@ class Usermanage(TrackingModel):
     firstName = models.CharField(max_length=200, null=True, blank=True)
     lastName = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
+    manisupality = models.CharField(max_length=200, null=True, blank=True)
     imageUrl = models.CharField(max_length=200, null=True, blank=True)
     activated = models.CharField(max_length=200, null=True, blank=True)
     langKey = models.CharField(max_length=200, null=True, blank=True)

@@ -17,8 +17,8 @@ class FacturesonedeAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    filterset_fields = ['id', 'contractNumber', 'clientCode', ]
-    search_fields = ['id', 'contractNumber', 'clientCode', ]
+    filterset_fields = ['id', 'contractNumber', 'clientCode','invoiceRef' ]
+    search_fields = ['id', 'contractNumber', 'clientCode', 'invoiceRef']
     ordering_fields = ['id', 'invoiceDate']
 
     def perform_create(self, serializer):

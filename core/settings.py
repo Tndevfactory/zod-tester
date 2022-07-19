@@ -66,7 +66,8 @@ INSTALLED_APPS = [
     'faq',
     'telecom',
     'audit',
-    'myadmin'
+    'myadmin',
+    'municipalite'
 
 ]
 

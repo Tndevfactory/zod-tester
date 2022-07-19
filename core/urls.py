@@ -40,7 +40,9 @@ urlpatterns = [
     path("cnss/services/microservice1/api/", include("cnss.urls")),
     path("faq/services/microservice1/api/", include("faq.urls")),
     path("sonede/services/microservice1/api/", include("sonede.urls")),
-    path("myadmin/services/microservice1/api/", include("myadmin.urls")),
+    path("telecom/services/microservice1/api/", include("telecom.urls")),
+    path("municipalite/services/microservice1/api/", include("municipalite.urls")),
+    path("myadmin/api/admin/", include("myadmin.urls")),
     # path("cnss/services/microservice1/api/", include("steg.urls")),
 
     # users managment

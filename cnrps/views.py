@@ -17,8 +17,8 @@ class AssureeAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    filterset_fields = ['id',]
-    search_fields = ['id',]
+    filterset_fields = ['id','cin','dateAf','dateFinContrat', 'dateNaissance', 'etatAffiliation','libCodePos', 'libModeRecrut', 'matricule', 'modRecru', 'nom',  'position','prenom']
+    search_fields = ['id','cin','dateAf','dateFinContrat', 'dateNaissance', 'etatAffiliation','libCodePos', 'libModeRecrut', 'matricule', 'modRecru', 'nom',  'position','prenom']
     ordering_fields = ['id', ]
 
     def perform_create(self, serializer):
@@ -47,8 +47,8 @@ class PensionAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    filterset_fields = ['id', ]
-    search_fields = ['id', ]
+    filterset_fields = ['id', 'matricule', 'lit',  'prenom', 'nom',  'datePaie',  'dateNais',  'etatAffiliation',   'cin',  'libModeRecrut' ]
+    search_fields = ['id', 'matricule', 'lit',  'prenom', 'nom',  'datePaie',  'dateNais',  'etatAffiliation',   'cin',  'libModeRecrut' ]
     ordering_fields = ['id', ]
 
     def perform_create(self, serializer):

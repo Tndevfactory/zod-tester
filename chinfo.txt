@@ -250,6 +250,7 @@ with open(image_path, "rb") as image_file:
 ctx["image"] = image_data
 
 return render(request, 'index.html', ctx)
+
 Note: The "rb" option stands for "read binary".
 
 Optionally you can add try except to catch FileNotFoundError and react accordingly.
