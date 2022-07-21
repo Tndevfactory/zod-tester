@@ -66,4 +66,4 @@ class PensionDetailAPIView(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         # return Facture.objects.filter(owner=self.request.user)
-        return Pension.objects.filter(partner=self.kwargs['matricule'])
+        return Pension.objects.filter(matricule=self.kwargs['matricule'])

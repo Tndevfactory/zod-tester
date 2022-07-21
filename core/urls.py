@@ -39,6 +39,7 @@ urlpatterns = [
     path("sonede/services/microservice1/api/", include("sonede.urls")),
     path("telecom/services/microservice1/api/", include("telecom.urls")),
     path("municipalite/services/microservice1/api/", include("municipalite.urls")),
+    path("transaction/services/microservice1/api/", include("transaction.urls")),
     path("myadmin/api/admin/", include("myadmin.urls")),
     # path("cnss/services/microservice1/api/", include("steg.urls")),
 

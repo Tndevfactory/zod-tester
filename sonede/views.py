@@ -36,4 +36,4 @@ class FacturesonedeDetailAPIView(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         # return Facture.objects.filter(owner=self.request.user)
-        return Facturesonede.objects.filter(reference=self.kwargs['clientCode'])
+        return Facturesonede.objects.filter(clientCode=self.kwargs['clientCode'])
