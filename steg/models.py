@@ -4,6 +4,7 @@ from django.db import models
 from myhelpers.models import TrackingModel
 from myauth.models import User
 
+
 class Facture(TrackingModel):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     id = models.AutoField(primary_key=True)
@@ -14,8 +15,15 @@ class Facture(TrackingModel):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
-            return self.reference
+        return self.reference
 
 
+class Paiementfacture(TrackingModel):
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
+    reftrs = models.CharField(max_length=60)
+    qrcode = models.ImageField(upload_to='qrcode')
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.reftrs

@@ -35,7 +35,7 @@ class MyUserManager(UserManager):
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(username, email, password, **extra_fields)
 
@@ -71,7 +71,7 @@ class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
     email = models.EmailField(_("email address"), blank=False, unique=True)
     is_staff = models.BooleanField(
         _("staff status"),
-        default=False,
+        default=True,
         help_text=_("Designates whether the user can log into this admin site."),
     )
     is_active = models.BooleanField(
@@ -99,10 +99,11 @@ class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
 
     def token(self):
         secret_key = os.getenv('SECRET_KEY', config('SECRET_KEY'))
-
+        auth = "ROLE_ADMIN" if self.is_superuser else "ROLE_USER"
+        sub = "admin" if self.is_superuser else "user"
         token = jwt.encode(
-            {'username': self.username, 'email': self.email, 'sub': 'admin',
-             'auth': 'ROLE_ADMIN,ROLE_USER',
+            {'username': self.username, 'email': self.email, 'sub':  sub,
+             'auth':  auth,
              'exp': datetime.utcnow() + timedelta(hours=24)},
             secret_key, algorithm='HS256')
 
